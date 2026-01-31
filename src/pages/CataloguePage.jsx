@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import './CataloguePage.css'
 
-const ITEMS_PER_PAGE = 8
+const ITEMS_PER_PAGE = 15
 
 function CataloguePage() {
   const [files, setFiles] = useState([])
@@ -22,7 +22,7 @@ function CataloguePage() {
     try {
       const { data, error } = await supabase
         .from('files')
-        .select('id, thumbnail, title')
+        .select('id, slug, thumbnail, title')
         .order('created_at', { ascending: false })
 
       if (error) throw error
@@ -166,7 +166,7 @@ function CataloguePage() {
               {paginatedFiles.map((file) => (
                 <Link
                   key={file.id}
-                  to={`/file/${file.id}`}
+                  to={`/file/${file.slug ?? file.id}`}
                   className="catalogue-card"
                 >
                   <div className="catalogue-card-thumb">

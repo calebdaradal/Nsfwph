@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<CataloguePage />} />
-        <Route path="/file/:id" element={<DownloadPage />} />
+        <Route path="/file/:slug" element={<DownloadPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/dashboard"

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 import { uploadFile, deleteFile, extractFilePathFromUrl } from '../../lib/storage'
+import { slugify } from '../../lib/slugify'
 import './FileCatalogue.css'
 
 function FileCatalogue() {
@@ -85,9 +86,14 @@ function FileCatalogue() {
         thumbnailUrl = await uploadFile(thumbnailFile, 'thumbnails', 'files')
       }
 
+      const slug = slugify(formData.title) || `file-${Date.now()}`
+      const subtitleNum = String(formData.subtitle || '').replace(/\D/g, '')
+      const subtitleValue = subtitleNum ? `${subtitleNum}mb size` : ''
       const dataToSave = {
         ...formData,
         thumbnail: thumbnailUrl,
+        slug,
+        subtitle: subtitleValue,
       }
 
       if (editingId) {
@@ -122,11 +128,12 @@ function FileCatalogue() {
   }
 
   const handleEdit = (file) => {
+    const subtitleNum = (file.subtitle || '').replace(/\s*mb\s*size$/i, '').trim()
     setFormData({
       title: file.title || '',
       download_link: file.download_link || '',
       thumbnail: file.thumbnail || '',
-      subtitle: file.subtitle || '',
+      subtitle: subtitleNum,
     })
     setThumbnailFile(null)
     setThumbnailPreview(file.thumbnail || null)
@@ -229,15 +236,24 @@ function FileCatalogue() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="subtitle">Subtitle (Optional)</label>
-          <input
-            type="text"
-            id="subtitle"
-            value={formData.subtitle}
-            onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
-            placeholder="Small italic text under download button"
-          />
-          <p className="form-hint">This text will appear in italics below the download button</p>
+          <label htmlFor="subtitle">Size (Optional)</label>
+          <div className="subtitle-input-wrap">
+            <input
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              id="subtitle"
+              value={formData.subtitle}
+              onChange={(e) => {
+                const v = e.target.value.replace(/\D/g, '')
+                setFormData({ ...formData, subtitle: v })
+              }}
+              placeholder="3"
+              maxLength={6}
+            />
+            <span className="subtitle-suffix">mb size</span>
+          </div>
+          <p className="form-hint">Numbers only. Shown below the download button (e.g. 3mb size)</p>
         </div>
 
         <button type="submit" disabled={loading || uploading} className="submit-button">

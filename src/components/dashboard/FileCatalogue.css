@@ -50,6 +50,24 @@
   border-color: var(--primary-color);
 }
 
+.subtitle-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.subtitle-input-wrap input {
+  width: auto;
+  min-width: 80px;
+  max-width: 120px;
+}
+
+.subtitle-suffix {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
 .file-input {
   padding: 0.5rem;
   border: 1px solid var(--border-color);

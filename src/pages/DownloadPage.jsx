@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase'
 import './DownloadPage.css'
 
 function DownloadPage() {
-  const { id } = useParams()
+  const { slug } = useParams()
   const [fileData, setFileData] = useState(null)
   const [linkRedirects, setLinkRedirects] = useState([])
   const [settings, setSettings] = useState(null)
@@ -12,35 +12,34 @@ function DownloadPage() {
 
   useEffect(() => {
     loadPageData()
-  }, [id])
+  }, [slug])
 
   const loadPageData = async () => {
     try {
-      // Load default file if no ID (homepage)
-      let fileId = id
-      if (!fileId) {
-        // Get the first file as default
-        const { data: files } = await supabase
-          .from('files')
-          .select('*')
-          .order('created_at', { ascending: false })
-          .limit(1)
-        
-        if (files && files.length > 0) {
-          fileId = files[0].id
-          setFileData(files[0])
-        }
-      } else {
-        // Load specific file
-        const { data, error } = await supabase
-          .from('files')
-          .select('*')
-          .eq('id', fileId)
-          .single()
-
-        if (error) throw error
-        setFileData(data)
+      if (!slug) {
+        setFileData(null)
+        setLoading(false)
+        return
       }
+
+      let { data, error } = await supabase
+        .from('files')
+        .select('*')
+        .eq('slug', slug)
+        .maybeSingle()
+
+      if (error) throw error
+      // Fallback: treat param as legacy id (e.g. old links or missing slug)
+      if (!data) {
+        const res = await supabase
+          .from('files')
+          .select('*')
+          .eq('id', slug)
+          .maybeSingle()
+        if (res.error) throw res.error
+        data = res.data
+      }
+      setFileData(data)
 
       // Load link redirects
       const { data: links } = await supabase
