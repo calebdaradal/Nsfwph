@@ -329,6 +329,13 @@
   flex-shrink: 0;
 }
 
+/* Hide Join now button in modal on mobile/small screens */
+@media (max-width: 768px) {
+  .catalogue-modal-link-cta {
+    display: none;
+  }
+}
+
 @media (max-width: 600px) {
   .catalogue-page {
     padding: 1.5rem 0.75rem;
@@ -347,5 +354,50 @@
   .catalogue-telegram-btn {
     width: 100%;
     justify-content: center;
+  }
+
+  /* Modal: centered on screen */
+  .catalogue-modal-overlay {
+    padding: 0.75rem;
+    align-items: center;
+  }
+
+  .catalogue-modal {
+    max-width: 100%;
+    max-height: 90vh;
+    margin: 0;
+    border-radius: 12px;
+  }
+
+  .catalogue-modal-header {
+    padding: 1rem 1.25rem;
+    min-height: 44px;
+  }
+
+  .catalogue-modal-close {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .catalogue-modal-body {
+    padding: 1rem 1.25rem 1.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .catalogue-modal-link-item {
+    padding: 1rem 1.25rem;
+    min-height: 48px;
+  }
+
+  .catalogue-modal-link-thumb {
+    width: 44px;
+    height: 44px;
+  }
+
+  .catalogue-modal-link-title {
+    font-size: 0.95rem;
   }
 }
