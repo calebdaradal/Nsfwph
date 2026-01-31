@@ -1,0 +1,246 @@
+.download-page {
+  min-height: 100vh;
+  background: var(--background-color);
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.download-container {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.download-section {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+}
+
+.thumbnail-container {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.download-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.file-title {
+  font-size: 2rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  margin: 0;
+  text-align: left;
+}
+
+.download-button {
+  padding: 1rem 2rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  align-self: flex-start;
+}
+
+.download-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+.download-button:active {
+  transform: translateY(0);
+}
+
+.file-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+.links-section {
+  width: 100%;
+}
+
+.links-title {
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.links-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 2px;
+}
+
+.links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.link-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background: var(--card-background);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  gap: 1rem;
+}
+
+.link-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.link-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.link-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  flex: 1;
+  text-align: left;
+}
+
+.link-button {
+  padding: 0.5rem 1.25rem;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 1rem;
+}
+
+.loading,
+.error-message {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  padding: 2rem;
+}
+
+.error-message {
+  color: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .download-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .download-container {
+    gap: 2rem;
+  }
+
+  .download-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .thumbnail-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .download-content {
+    width: 100%;
+    align-items: center;
+  }
+
+  .file-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .download-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+    align-self: center;
+  }
+
+  .file-subtitle {
+    text-align: center;
+  }
+
+  .links-title {
+    font-size: 1.5rem;
+  }
+
+  .link-item {
+    padding: 1rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .link-thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+
+  .link-button {
+    display: none;
+  }
+
+  .thumbnail-container {
+    max-width: 100%;
+  }
+}
