@@ -4,7 +4,7 @@
   padding: 2rem 1rem;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .download-container {
@@ -13,6 +13,32 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
+}
+
+.download-browse-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  align-self: flex-start;
+}
+
+.download-browse-btn:hover {
+  background: var(--card-background);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.download-browse-btn svg {
+  flex-shrink: 0;
 }
 
 .download-section {
