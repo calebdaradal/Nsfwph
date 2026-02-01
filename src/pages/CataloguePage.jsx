@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { supabase } from '../lib/supabase'
 import './CataloguePage.css'
 
@@ -73,8 +74,22 @@ function CataloguePage() {
     )
   }
 
+  const defaultImageUrl = typeof window !== 'undefined' ? `${window.location.origin}/favicon.png` : '/favicon.png'
+
   return (
     <div className="catalogue-page">
+      <Helmet>
+        <title>Ultra Garden of PH</title>
+        <meta name="description" content="File catalogue and downloads" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Ultra Garden of PH" />
+        <meta property="og:description" content="File catalogue and downloads" />
+        <meta property="og:image" content={defaultImageUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Ultra Garden of PH" />
+        <meta name="twitter:description" content="File catalogue and downloads" />
+        <meta name="twitter:image" content={defaultImageUrl} />
+      </Helmet>
       <div className="catalogue-container">
         {/* Telegram button – opens modal with redirect links */}
         <button

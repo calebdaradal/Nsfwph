@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { supabase } from '../lib/supabase'
 import './DownloadPage.css'
 
@@ -97,8 +98,25 @@ function DownloadPage() {
     </svg>
   )
 
+  // Absolute URL for link preview (og:image requires full URL)
+  const imageUrl = fileData.thumbnail?.startsWith('http')
+    ? fileData.thumbnail
+    : (typeof window !== 'undefined' ? `${window.location.origin}${fileData.thumbnail}` : fileData.thumbnail)
+
   return (
     <div className="download-page" style={customStyles}>
+      <Helmet>
+        <title>{fileData.title} | Ultra Garden of PH</title>
+        <meta name="description" content={fileData.subtitle || fileData.title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={fileData.title} />
+        <meta property="og:description" content={fileData.subtitle || fileData.title} />
+        <meta property="og:image" content={imageUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={fileData.title} />
+        <meta name="twitter:description" content={fileData.subtitle || fileData.title} />
+        <meta name="twitter:image" content={imageUrl} />
+      </Helmet>
       <div className="download-container">
         <Link to="/" className="download-browse-btn" aria-label="Back to catalogue">
           {backIcon}
